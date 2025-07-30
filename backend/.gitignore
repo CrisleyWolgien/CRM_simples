@@ -1,0 +1,45 @@
+# Arquivos de Bytecode e Cache do Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ambientes Virtuais (gerenciados pelo Poetry ou venv)
+.venv
+venv/
+env/
+ENV/
+
+# Arquivos de configuração de IDEs e editores
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Arquivos de dependências e build
+*.egg-info/
+build/
+dist/
+wheels/
+*.whl
+
+# Arquivos de teste e cobertura de código
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+nosetests.xml
+coverage.xml
+
+# Arquivos de sistema operacional
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Arquivos de segredos e configurações de ambiente
+# NUNCA envie seus segredos para o repositório!
+*.env
+.env.*
+
+# Logs
+*.log
