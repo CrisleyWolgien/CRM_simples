@@ -1,26 +1,36 @@
+from typing import List, Optional
+from datetime import date
 from pydantic import BaseModel, Field
-from typing import Optional
-from datetime import datetime
+
 
 class ServiceCreate(BaseModel):
-    name: str
-    description: Optional[str] = None
+    type: List[str]
+    description: str
+    status: str
+    vehicle: str
+    date_end: Optional[date] = None
     price: float
-    duration: int
-    payment_status: Optional[str] = None
+    payment_condition: str
+    observation: Optional[str] = None
+    assurance: bool
+    assurance_time: Optional[int] = None
+    assurance_start: Optional[date] = None
 
 
 class ServiceRead(ServiceCreate):
-    id: str
-    created_at: datetime
-
-    class Config:
-        orm_mode = True
+    client: str
+    date_start: date
 
 
-class ServiceEdit(BaseModel):
-    name: Optional[str] = None
+class ServiceUpdate(BaseModel):
+    type: Optional[List[str]] = None
     description: Optional[str] = None
+    status: Optional[str] = None
+    vehicle: Optional[str] = None
+    date_end: Optional[date] = None
     price: Optional[float] = None
-    duration: Optional[int] = None
-    payment_status: Optional[str] = None
+    payment_condition: Optional[str] = None
+    observation: Optional[str] = None
+    assurance: Optional[bool] = None
+    assurance_time: Optional[int] = None
+    assurance_start: Optional[date] = None

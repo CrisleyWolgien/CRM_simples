@@ -4,7 +4,7 @@ from typing import Optional
 from pydantic import EmailStr
 from uuid import UUID, uuid4
 
-class scheduling(SQLModel, table=True):
+class Scheduling(SQLModel, table=True):
     id: Optional[UUID] = Field(default_factory=uuid4, primary_key=True)
     name: str # nome do cliente
     email: EmailStr # email do cliente
@@ -12,6 +12,3 @@ class scheduling(SQLModel, table=True):
     date: date # data do agendamento
     time: datetime # hora do agendamento
     description: Optional[str] = None # descrição do agendamento
-
-    def __repr__(self):
-        return f"Appointment(id={self.id}, name={self.name}, email={self.email}, phone={self.phone}, date={self.date}, time={self.time}, description={self.description})"

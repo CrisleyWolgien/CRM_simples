@@ -1,5 +1,5 @@
 from pydantic import BaseModel, EmailStr
-from typing import Optional
+from typing import Optional, List
 from datetime import date
 
 
@@ -8,7 +8,7 @@ class createClient(BaseModel):
     email: EmailStr
     phone: int
     date_joined: date
-    last_service: date
+    notes: Optional[str] = None
 
 
 class updateClient(BaseModel):
@@ -16,4 +16,13 @@ class updateClient(BaseModel):
     email: Optional[EmailStr] = None
     phone: Optional[int] = None
     date_joined: Optional[date] = None
-    last_service: Optional[date] = None
+    notes: Optional[str] = None
+
+class ReadClient(BaseModel):
+    name: str
+    email: EmailStr
+    phone: int
+    date_joined: date
+    notes: Optional[str] = None
+    vehicles: List[str]
+    services: List[str]

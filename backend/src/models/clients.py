@@ -1,16 +1,17 @@
-from sqlmodel import SQLModel, Field
-from datetime import datetime, date
-from typing import Optional
-from pydantic import EmailStr
+from sqlmodel import SQLModel, Field, Relationship
+from datetime import date
+from typing import List, Optional
 from uuid import UUID, uuid4
+from models.vehicle import Vehicle
+from models.service import Service
 
-class clients(SQLModel, table=True):
+class Client(SQLModel, table=True):
     id: Optional[UUID] = Field(default_factory=uuid4, primary_key=True)
-    name: str  # nome do cliente
-    email: EmailStr  # email do cliente
-    phone: str  # telefone do cliente
-    date_joined: date  # data de adesão do cliente
-    last_service: Optional[date] = None  # última vez que o cliente foi contatado
+    name: str
+    email: str
+    phone: str
+    notes: Optional[str] = None
+    join_date : date = Field(default_factory=date.today)
 
-    def __repr__(self):
-        return f"Client(id={self.id}, name={self.name}, email={self.email}, phone={self.phone}, date_joined={self.date_joined}, last_contacted={self.last_service})"
+    vehicles: List["Vehicle"] = Relationship(back_populates="owner")
+    services: List["Service"] = Relationship(back_populates="client")
