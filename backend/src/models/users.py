@@ -3,6 +3,7 @@ from typing import Optional
 from pydantic import EmailStr
 from uuid import UUID, uuid4
 
+
 class Users(SQLModel, table=True):
     id: Optional[UUID] = Field(default_factory=uuid4, primary_key=True)
     username: str  # nome de usuário

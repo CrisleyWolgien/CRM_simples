@@ -3,7 +3,6 @@ from typing import Optional
 from datetime import datetime, date
 
 
-
 class schedulingCreate(BaseModel):
     name: str  # nome do cliente
     email: EmailStr  # email do cliente

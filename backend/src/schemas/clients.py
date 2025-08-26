@@ -18,6 +18,7 @@ class updateClient(BaseModel):
     date_joined: Optional[date] = None
     notes: Optional[str] = None
 
+
 class ReadClient(BaseModel):
     name: str
     email: EmailStr
