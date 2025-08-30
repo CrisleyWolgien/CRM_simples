@@ -1,8 +1,9 @@
-from sqlmodel import SQLModel, Field, Relationship
-from typing import Optional
-from uuid import UUID, uuid4
-from models.clients import Client
+# src/models/vehicle.py
 
+from sqlmodel import SQLModel, Field, Relationship
+from typing import Optional, List # Importe List
+
+from uuid import UUID, uuid4
 
 class Vehicle(SQLModel, table=True):
     id: Optional[UUID] = Field(default_factory=uuid4, primary_key=True)
@@ -12,5 +13,8 @@ class Vehicle(SQLModel, table=True):
     year: int
     color: Optional[str] = None
 
-    owner_id: int = Field(foreign_key="client_id")
-    owner: Optional[Client] = Relationship(back_populates="vehicles")
+    owner_id: UUID = Field(foreign_key="client.id")
+    owner: Optional["Client"] = Relationship(back_populates="vehicles")
+    
+    # ADICIONADO: A relação para a lista de serviços
+    services: List["Service"] = Relationship(back_populates="vehicle_rel")

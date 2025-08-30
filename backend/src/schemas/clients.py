@@ -1,29 +1,39 @@
+# src/schemas/clients.py
+
 from pydantic import BaseModel, EmailStr
-from typing import Optional, List
+from typing import Optional
 from datetime import date
+from uuid import UUID
+from .vehicle import VehicleRead
 
 
 class createClient(BaseModel):
     name: str
     email: EmailStr
-    phone: int
-    date_joined: date
+    phone: str  # <- ALTERADO de int para str
     notes: Optional[str] = None
+    # Removido date_joined, pois o modelo já o define com um valor padrão
 
 
 class updateClient(BaseModel):
     name: Optional[str] = None
     email: Optional[EmailStr] = None
-    phone: Optional[int] = None
-    date_joined: Optional[date] = None
+    phone: Optional[str] = None  # <- ALTERADO de int para str
     notes: Optional[str] = None
 
 
 class ReadClient(BaseModel):
+    id: UUID  # Adicionado para que possamos ver o ID na resposta
     name: str
     email: EmailStr
-    phone: int
-    date_joined: date
+    phone: str  # <- ALTERADO de int para str
+    join_date: date
     notes: Optional[str] = None
-    vehicles: List[str]
-    services: List[str]
+
+    # Adicionando uma configuração para permitir a leitura de modelos ORM
+    class Config:
+        from_attributes = True
+
+
+class ClientReadWithVehicles(ReadClient):
+    vehicles: list[VehicleRead] = []

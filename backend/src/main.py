@@ -1,7 +1,14 @@
 # src/main.py
 
 from fastapi import FastAPI
-from src.routers import users  # Importe o novo router de usuários
+from src.routers import (
+    users,
+    login,
+    clients,
+    vehicles,
+    services,
+    scheduling,
+)  # Importe o router de agendamentos
 
 app = FastAPI(
     title="CRM para Mecânicas",
@@ -15,4 +22,9 @@ def read_root():
 
 
 # Inclui as rotas na sua aplicação
-app.include_router(users.router)  # Adiciona as rotas de usuário
+app.include_router(login.router)
+app.include_router(users.router)
+app.include_router(clients.router)
+app.include_router(vehicles.router)
+app.include_router(services.router)
+app.include_router(scheduling.router)
